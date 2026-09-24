@@ -1,0 +1,19 @@
+﻿# Virtual environment - never push
+.venv/
+
+# Root-level original duplicate files (before folder organization)
+/logistic_regression.pkl
+/preprocessor.pkl
+/rf_model.pkl
+/Retail_Customer_Purchase_Prediction (1).csv
+/Retail_Customer_Purchase_Prediction.ipynb
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
