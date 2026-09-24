@@ -1,4 +1,4 @@
-﻿import streamlit as st
+import streamlit as st
 import pandas as pd
 import numpy as np
 import joblib
@@ -12,17 +12,17 @@ st.set_page_config(
 
 # LOAD MODELS
 @st.cache_resource
-def load_models():
-    rf_model     = joblib.load("models/rf_model.pkl")
+def load_model():
+    model = joblib.load("models/logistic_regression.pkl")
     preprocessor = joblib.load("models/preprocessor.pkl")
-    return rf_model, preprocessor
+    return model, preprocessor
 
-rf_model, preprocessor = load_models()
+model, preprocessor = load_model()
 
 # HEADER
 st.title("Retail Customer Purchase Prediction")
 st.markdown(
-    "This system uses a trained **Random Forest** model to predict whether an online "
+    "This system uses a trained **Logistic Regression** model to predict whether an online "
     "retail customer is likely to make a purchase based on their website interaction, "
     "browsing behaviour, and purchase history.\n\n"
     "Fill in the customer details below and click **Predict Purchase**."
@@ -120,8 +120,8 @@ if st.button("Predict Purchase", type="primary", use_container_width=True):
 
     # Transform and Predict
     input_transformed = preprocessor.transform(input_data)
-    prediction        = rf_model.predict(input_transformed)[0]
-    probability       = rf_model.predict_proba(input_transformed)[0][1]
+    prediction        = model.predict(input_transformed)[0]
+    probability       = model.predict_proba(input_transformed)[0][1]
 
     # Likelihood
     if probability >= 0.70:
@@ -165,4 +165,4 @@ if st.button("Predict Purchase", type="primary", use_container_width=True):
         )
 
 st.divider()
-st.caption("PS-02 - Retail Customer Purchase Prediction | Model: Random Forest (n_estimators=100, random_state=42)")
+st.caption("PS-02 - Retail Customer Purchase Prediction | Model: Logistic Regression")
